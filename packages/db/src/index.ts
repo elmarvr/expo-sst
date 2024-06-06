@@ -2,10 +2,16 @@ import { Resource } from "sst";
 import { drizzle } from "drizzle-orm/aws-data-api/pg";
 import { RDSDataClient } from "@aws-sdk/client-rds-data";
 import { todo } from "./schema/common";
+import { session, user } from "./schema/auth";
 
 const client = new RDSDataClient({});
 
 export const table = {
+  //auth
+  user,
+  session,
+
+  //common
   todo,
 };
 
@@ -16,3 +22,5 @@ export const db = drizzle(client, {
 
   schema: table,
 });
+
+export * from "drizzle-orm/pg-core/expressions";

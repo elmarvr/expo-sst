@@ -9,6 +9,10 @@ declare module "sst" {
       secretArn: string
       type: "sst.aws.Postgres"
     }
+    UserPool: {
+      id: string
+      type: "sst.aws.CognitoUserPool"
+    }
   }
 }
 export {}
