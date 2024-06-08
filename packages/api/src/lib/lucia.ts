@@ -1,10 +1,11 @@
+import { webcrypto } from "node:crypto";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { Resource } from "sst";
-
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { db, eq, table } from "@acme/db";
 import { Lucia } from "lucia";
-import { webcrypto } from "node:crypto";
+
+import { db, table, eq } from "@acme/db";
+import { getImageUrl, uploadImagefromUrl } from "./s3";
 
 globalThis.crypto = webcrypto;
 
@@ -14,7 +15,9 @@ export const lucia = new Lucia(
     getUserAttributes(attrs) {
       return {
         id: attrs.id,
+        name: attrs.name,
         email: attrs.email,
+        avatar: attrs.avatarKey ? getImageUrl(attrs.avatarKey) : null,
       };
     },
   }
@@ -38,11 +41,15 @@ export async function signInWithIdToken(idToken: string) {
   });
 
   if (!user) {
+    const avatarKey = await uploadImagefromUrl(payload.picture as string);
+
     const result = await db
       .insert(table.user)
       .values({
         cognitoId: payload.sub,
         email: payload.email as string,
+        name: payload.name as string,
+        avatarKey,
       })
       .returning();
 

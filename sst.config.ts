@@ -12,6 +12,10 @@ export default $config({
     const vpc = new sst.aws.Vpc("Vpc", {});
     const rds = new sst.aws.Postgres("Postgres", { vpc });
 
+    const bucket = new sst.aws.Bucket("Bucket", {
+      public: true,
+    });
+
     const userPool = new sst.aws.CognitoUserPool("UserPool", {
       usernames: ["email"],
     });
@@ -28,7 +32,7 @@ export default $config({
 
     const api = new sst.aws.Function("Api", {
       url: true,
-      link: [rds, userPool],
+      link: [rds, userPool, bucket],
       environment: {
         COGNTIO_CLIENT_ID: client.id,
       },

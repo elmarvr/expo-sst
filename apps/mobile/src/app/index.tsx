@@ -5,7 +5,6 @@ import { Text, View } from 'react-native';
 import { Button } from '~/components/Button';
 import { api } from '~/lib/api';
 import { useAuth } from '~/lib/auth';
-import { secureStore } from '~/lib/secure-store';
 
 export default function Home() {
   const { signIn } = useAuth();
