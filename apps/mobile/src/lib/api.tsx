@@ -4,7 +4,7 @@ import { createTRPCReact, httpBatchLink } from '@trpc/react-query';
 import { useState } from 'react';
 import superjson from 'superjson';
 
-import { secureStore } from './secure-store';
+import { authStore } from './storage';
 
 export const api = createTRPCReact<AppRouter>();
 
@@ -16,7 +16,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
         httpBatchLink({
           url: process.env.EXPO_PUBLIC_API_URL!,
           async headers() {
-            const token = await secureStore.getItem('auth-session-token');
+            const token = await authStore.getItem('sessionToken');
 
             return {
               Authorization: `Bearer ${token}`,

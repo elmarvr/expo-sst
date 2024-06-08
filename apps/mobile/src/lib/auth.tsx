@@ -8,7 +8,7 @@ import {
 import { useEffect } from 'react';
 
 import { api } from './api';
-import { secureStore } from './secure-store';
+import { authStore } from './storage';
 
 const discovery = {
   authorizationEndpoint: `${process.env.EXPO_PUBLIC_COGNITO_USER_POOL_URL}/oauth2/authorize`,
@@ -68,7 +68,7 @@ export function useAuth() {
         idToken: response.idToken!,
       });
 
-      await secureStore.setItem('auth-session-token', sessionToken);
+      await authStore.setItem('sessionToken', sessionToken);
     } catch (error) {
       console.error(error);
     }

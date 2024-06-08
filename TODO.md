@@ -1,4 +1,3 @@
-- Make nativewind work
-- Add rnr
+- Add RNR
 - Profile page
 - Set up prod / dev env

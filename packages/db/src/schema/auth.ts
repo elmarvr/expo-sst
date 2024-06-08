@@ -3,10 +3,10 @@ import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
   id: serial("id").primaryKey(),
-  cognitoId: text("cognito_id").notNull().unique(),
   email: text("email").notNull().unique(),
   name: text("name").notNull(),
   avatarKey: text("avatar_key"),
+  cognitoId: text("cognito_id").notNull().unique(),
 });
 
 export const session = pgTable("sessions", {
