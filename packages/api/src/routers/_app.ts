@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { table } from "@acme/db";
 import { publicProcedure, router } from "../trpc";
+import { authRouter } from "./auth";
 
 export const appRouter = router({
   todo: router({
@@ -26,6 +27,7 @@ export const appRouter = router({
       return todos;
     }),
   }),
+  auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;
