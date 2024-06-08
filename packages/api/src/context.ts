@@ -7,7 +7,7 @@ export async function createContext({
   event,
 }: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>) {
   const { user, session } = await getSessionFromBearerToken(
-    event.headers["Authorisation"] ?? ""
+    event.headers.authorization ?? ""
   );
 
   return {

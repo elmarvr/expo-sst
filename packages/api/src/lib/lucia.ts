@@ -10,7 +10,14 @@ globalThis.crypto = webcrypto;
 
 export const lucia = new Lucia(
   new DrizzlePostgreSQLAdapter(db, table.session, table.user),
-  {}
+  {
+    getUserAttributes(attrs) {
+      return {
+        id: attrs.id,
+        email: attrs.email,
+      };
+    },
+  }
 );
 
 export function getSessionFromBearerToken(authorization: string) {
@@ -45,7 +52,7 @@ export async function signInWithIdToken(idToken: string) {
   const session = await lucia.createSession(user.id, {});
 
   return {
-    sessionId: session.id,
+    sessionToken: session.id,
   };
 }
 
@@ -54,7 +61,7 @@ declare module "lucia" {
     Lucia: typeof lucia;
     UserId: number;
 
-    UserAttributes: Omit<typeof table.user.$inferSelect, "id">;
+    DatabaseUserAttributes: typeof table.user.$inferSelect;
   }
 }
 
