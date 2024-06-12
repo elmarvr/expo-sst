@@ -5,6 +5,7 @@ import {
   makeRedirectUri,
   useAuthRequest,
 } from 'expo-auth-session';
+import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
 
 import { api } from './api';
@@ -20,6 +21,7 @@ const clientId = process.env.EXPO_PUBLIC_COGNITO_CLIENT_ID!;
 const redirectUri = makeRedirectUri({});
 
 export function useAuth() {
+  const router = useRouter();
   const utils = api.useUtils();
   const { mutateAsync: signInWithIdToken } = api.auth.signInWithIdToken.useMutation({
     onSuccess: async () => {
@@ -69,6 +71,8 @@ export function useAuth() {
       });
 
       await authStore.setItem('sessionToken', sessionToken);
+
+      router.push('profile');
     } catch (error) {
       console.error(error);
     }

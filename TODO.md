@@ -1,3 +1,2 @@
-- Add RNR
-- Profile page
+- Switch to gluestack
 - Set up prod / dev env

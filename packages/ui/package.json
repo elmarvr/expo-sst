@@ -1,0 +1,19 @@
+{
+  "name": "@acme/ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "ui:add": "pnpm dlx @react-native-reusables/cli@latest add"
+  },
+  "devDependencies": {
+    "nativewind": "^4.0.1"
+  },
+  "dependencies": {
+    "cva": "1.0.0-beta.1",
+    "tailwind-merge": "^2.3.0"
+  }
+}
