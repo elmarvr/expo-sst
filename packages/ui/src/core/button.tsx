@@ -1,26 +1,34 @@
 import * as React from "react";
-import { Pressable } from "react-native";
-import { TextClassContext } from "./text";
-import { cx, cva } from "../lib/utils";
+import {
+  Pressable,
+  type PressableProps,
+  Text,
+  type TextProps,
+  View,
+  type ViewProps,
+  ActivityIndicator,
+  type ActivityIndicatorProps,
+} from "react-native";
+import { createButton } from "@gluestack-ui/button";
+import type { IButtonGroupProps } from "@gluestack-ui/button/lib/typescript/types";
+import { cva } from "../lib/utils";
 import type { VariantProps } from "cva";
 
 const buttonVariants = cva({
-  base: "group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
+  base: "group flex flex-row gap-3 items-center justify-center rounded-md",
   variants: {
     variant: {
-      default: "bg-primary web:hover:opacity-90 active:opacity-90",
-      destructive: "bg-destructive web:hover:opacity-90 active:opacity-90",
-      outline:
-        "border border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
-      secondary: "bg-secondary web:hover:opacity-80 active:opacity-80",
-      ghost:
-        "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
-      link: "web:underline-offset-4 web:hover:underline web:focus:underline ",
+      default: "bg-primary active:opacity-90",
+      destructive: "bg-destructive active:opacity-90",
+      outline: "border border-input bg-background active:bg-accent",
+      secondary: "bg-secondary",
+      ghost: "active:bg-accent",
+      link: "",
     },
     size: {
-      default: "h-10 px-4 py-2 native:h-12 native:px-5 native:py-3",
+      default: "h-10 px-4 py-2 h-12 px-5 py-3",
       sm: "h-9 rounded-md px-3",
-      lg: "h-11 rounded-md px-8 native:h-14",
+      lg: "h-11 rounded-md px-8 h-14",
       icon: "h-10 w-10",
     },
   },
@@ -31,7 +39,7 @@ const buttonVariants = cva({
 });
 
 const buttonTextVariants = cva({
-  base: "web:whitespace-nowrap text-sm native:text-base font-medium text-foreground web:transition-colors",
+  base: "text-sm text-base font-medium text-foreground",
   variants: {
     variant: {
       default: "text-primary-foreground",
@@ -45,7 +53,7 @@ const buttonTextVariants = cva({
     size: {
       default: "",
       sm: "",
-      lg: "native:text-lg",
+      lg: "text-lg",
       icon: "",
     },
   },
@@ -55,33 +63,77 @@ const buttonTextVariants = cva({
   },
 });
 
-type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
-  VariantProps<typeof buttonVariants>;
+const ButtonContext = React.createContext<{
+  variants: VariantProps<typeof buttonVariants>;
+} | null>(null);
 
-const Button = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  ButtonProps
->(({ className, variant, size, ...props }, ref) => {
-  return (
-    <TextClassContext.Provider
-      value={cx(
-        props.disabled && "web:pointer-events-none",
-        buttonTextVariants({ variant, size })
-      )}
-    >
-      <Pressable
-        className={cx(
-          props.disabled && "opacity-50 web:pointer-events-none",
-          buttonVariants({ variant, size, className })
-        )}
-        ref={ref}
-        role="button"
-        {...props}
-      />
-    </TextClassContext.Provider>
-  );
+export function useButtonContext() {
+  const context = React.useContext(ButtonContext);
+  if (!context) {
+    throw new Error(
+      "useButtonContext must be used within a <Button /> component"
+    );
+  }
+  return context;
+}
+
+export const UIButton = createButton({
+  Root: Pressable,
+  Text: Text,
+  Group: View,
+  Spinner: ActivityIndicator,
+  Icon: View,
 });
-Button.displayName = "@ui/Button";
 
-export { Button, buttonTextVariants, buttonVariants };
-export type { ButtonProps };
+export interface ButtonRootProps
+  extends PressableProps,
+    VariantProps<typeof buttonVariants> {}
+const ButtonRoot = React.forwardRef<View, ButtonRootProps>(
+  ({ variant, size, className, ...props }, ref) => {
+    return (
+      <ButtonContext.Provider value={{ variants: { variant, size } }}>
+        <UIButton
+          {...props}
+          className={buttonVariants({ className, variant, size })}
+          ref={ref}
+        />
+      </ButtonContext.Provider>
+    );
+  }
+);
+
+export interface ButtonTextProps extends TextProps {}
+const ButtonText = React.forwardRef<TextProps, ButtonTextProps>(
+  ({ className, ...props }, ref) => {
+    const { variants } = useButtonContext();
+
+    return (
+      <UIButton.Text
+        {...props}
+        className={buttonTextVariants({ className, ...variants })}
+        ref={ref}
+      />
+    );
+  }
+);
+
+export interface ButtonGroupProps extends IButtonGroupProps {}
+const ButtonGroup = React.forwardRef<ViewProps, ButtonGroupProps>(
+  (props, ref) => {
+    return <UIButton.Group {...props} ref={ref} />;
+  }
+);
+
+export interface ButtonSpinnerProps extends ActivityIndicatorProps {}
+const ButtonSpinner = React.forwardRef<
+  ActivityIndicatorProps,
+  ButtonSpinnerProps
+>((props, ref) => {
+  return <UIButton.Spinner {...props} ref={ref} />;
+});
+
+export const Button = Object.assign(ButtonRoot, {
+  Text: ButtonText,
+  Group: ButtonGroup,
+  Spinner: ButtonSpinner,
+});

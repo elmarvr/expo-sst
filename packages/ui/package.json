@@ -13,6 +13,10 @@
     "nativewind": "^4.0.1"
   },
   "dependencies": {
+    "@gluestack-ui/avatar": "^0.1.16",
+    "@gluestack-ui/button": "^1.0.5",
+    "@gluestack-ui/form-control": "^0.1.17",
+    "@gluestack-ui/input": "^0.1.30",
     "cva": "1.0.0-beta.1",
     "tailwind-merge": "^2.3.0"
   }

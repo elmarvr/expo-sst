@@ -1,18 +1,23 @@
-import { Button, Text } from '@acme/ui';
+import { Input } from '@acme/ui';
 import { Stack } from 'expo-router';
+import { Text, View } from 'react-native';
 
-import { useAuth } from '~/lib/auth';
-
-export default function Details() {
-  const { signIn } = useAuth();
-
+export default function Home() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Auth' }} />
+      <Stack.Screen options={{ title: 'Home' }} />
 
-      <Button onPress={() => signIn()}>
-        <Text>Sign in</Text>
-      </Button>
+      <View className="gap-y-1.5 p-3">
+        <Input.Group isInvalid>
+          <Input.Slot>
+            <Text>123</Text>
+          </Input.Slot>
+          <Input />
+          <Input.Slot>
+            <Text>456</Text>
+          </Input.Slot>
+        </Input.Group>
+      </View>
     </>
   );
 }

@@ -204,6 +204,18 @@ importers:
 
   packages/ui:
     dependencies:
+      '@gluestack-ui/avatar':
+        specifier: ^0.1.16
+        version: 0.1.16(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/button':
+        specifier: ^1.0.5
+        version: 1.0.5(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/form-control':
+        specifier: ^0.1.17
+        version: 0.1.17(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/input':
+        specifier: ^0.1.30
+        version: 0.1.30(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
       cva:
         specifier: 1.0.0-beta.1
         version: 1.0.0-beta.1
@@ -3876,6 +3888,77 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
+  /@gluestack-ui/avatar@0.1.16(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-5and3vzYuv/Si0q2n+5qOp1mmaT5GKgBBNtMBr+/gtYtqxPV299B0AUL513JDSRaDiJHw/gb0Xxaf5VbgJ0UNA==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@gluestack-ui/button@1.0.5(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-FVtOxPMb8nla8wCRTGSRsYX5T95B6PUSKnYXp0UtbFYleP24SCQeD5sVKzm12JuMPb5JzaPbvNabtoBSwJjf9w==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@gluestack-ui/form-control@0.1.17(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-ctmbce3Tf/rpZyXSleOI2aUrOZEa/t7ubaB61F9Y0CauoaELMHrfSr4UZ5y4GC7z7pwvLXtMEpzEWvDQ9Af9Bg==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@gluestack-ui/input@0.1.30(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-braYOqM6ZXn1LpHpPizpg0ZuxXcgK9CMOn9StGjN/pnY5gxvEtaJdqRyAHFJniZBeXiX8CugetWzidNiEKenuA==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/form-control': 0.1.17(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@gluestack-ui/utils@0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-L9+ddAn5FLtNJYut7KBGChelt+SvDW3C+6dXduZyP9DD1BoDVTRVwPVYblvbefZf2ZOdTALtHIIO3n/n1bWlbg==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
   /@graphql-typed-document-node/core@3.2.0(graphql@15.8.0):
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
@@ -4374,6 +4457,90 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-aria/focus@3.17.1(react@18.2.0):
+    resolution: {integrity: sha512-FLTySoSNqX++u0nWZJPPN5etXY0WBxaIe/YuL/GTEeuqUIuC/2bJSaw5hlsM6T2yjy6Y/VAxBcKSdAFUlU6njQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/interactions': 3.21.3(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      clsx: 2.0.0
+      react: 18.2.0
+    dev: false
+
+  /@react-aria/interactions@3.21.3(react@18.2.0):
+    resolution: {integrity: sha512-BWIuf4qCs5FreDJ9AguawLVS0lV9UU+sK4CCnbCNNmYqOWY+1+gRXCsnOM32K+oMESBxilAjdHW5n1hsMqYMpA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/ssr': 3.9.4(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-aria/ssr@3.9.4(react@18.2.0):
+    resolution: {integrity: sha512-4jmAigVq409qcJvQyuorsmBR4+9r3+JEC60wC+Y0MZV0HCtTmm8D9guYXlJMdx0SSkgj0hHAyFm/HvPNFofCoQ==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-aria/utils@3.24.1(react@18.2.0):
+    resolution: {integrity: sha512-O3s9qhPMd6n42x9sKeJ3lhu5V1Tlnzhu6Yk8QOvDuXf7UGuUjXf9mzfHJt1dYzID4l9Fwm8toczBzPM9t0jc8Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/ssr': 3.9.4(react@18.2.0)
+      '@react-stately/utils': 3.10.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      clsx: 2.0.0
+      react: 18.2.0
+    dev: false
+
+  /@react-native-aria/focus@0.2.9(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-zVgOIzKwnsyyurUxlZnzUKB2ekK/cmK64sQJIKKUlkJKVxd2EAFf7Sjz/NVEoMhTODN3qGRASTv9bMk/pBzzVA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@react-aria/focus': 3.17.1(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
+    dev: false
+
+  /@react-native-aria/interactions@0.2.13(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-Uzru5Pqq5pG46lg/pzXoku9Y9k1UvuwJB/HRLSwahdC6eyNJOOm4kmadR/iziL/BeTAi5rOZsPEd0IKcMdH3nA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@react-aria/interactions': 3.21.3(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-native-aria/utils': 0.2.11(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
+    dev: false
+
+  /@react-native-aria/utils@0.2.11(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-8MzE25pYDo1ZQtu7N9grx2Q+2uK58Tvvg4iJ7Nvx3PXTEz2XKU8G//yX9un97f7zCM6ptL8viRdKbSYDBmQvsA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@react-aria/ssr': 3.9.4(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
+    dev: false
+
   /@react-native-async-storage/async-storage@1.23.1(react-native@0.74.1):
     resolution: {integrity: sha512-Qd2kQ3yi6Y3+AcUlrHxSLlnBvpdCEMVGFlVBneVOjaFaPU61g1huc38g339ysXspwY1QZA2aNhrk/KlHGO+ewA==}
     peerDependencies:
@@ -4723,6 +4890,7 @@ packages:
       nullthrows: 1.1.1
       react: 18.2.0
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.2.79)(react@18.2.0)
+    dev: false
 
   /@react-native/virtualized-lists@0.74.83(react-native@0.74.1)(react@18.2.0):
     resolution: {integrity: sha512-rmaLeE34rj7py4FxTod7iMTC7BAsm+HrGA8WxYmEJeyTV7WSaxAkosKoYBz8038mOiwnG9VwA/7FrB6bEQvn1A==}
@@ -4739,7 +4907,6 @@ packages:
       nullthrows: 1.1.1
       react: 18.2.0
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
-    dev: true
 
   /@react-navigation/bottom-tabs@6.5.20(@react-navigation/native@6.1.17)(react-native-safe-area-context@4.10.1)(react-native-screens@3.31.1)(react-native@0.74.1)(react@18.2.0):
     resolution: {integrity: sha512-ow6Z06iS4VqBO8d7FP+HsGjJLWt2xTWIvuWjpoCvsM/uQXzCRDIjBv9HaKcXbF0yTW7IMir0oDAbU5PFzEDdgA==}
@@ -4824,6 +4991,23 @@ packages:
     resolution: {integrity: sha512-lTM8gSFHSfkJvQkxacGM6VJtBt61ip2XO54aNfswD+KMw6eeZ4oehl7m0me3CR9hnDE4+60iAZR8sAhvCiI3NA==}
     dependencies:
       nanoid: 3.3.7
+    dev: false
+
+  /@react-stately/utils@3.10.1(react@18.2.0):
+    resolution: {integrity: sha512-VS/EHRyicef25zDZcM/ClpzYMC5i2YGN6uegOeQawmgfGjb02yaCX0F0zR69Pod9m2Hr3wunTbtpgVXvYbZItg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-types/shared@3.23.1(react@18.2.0):
+    resolution: {integrity: sha512-5d+3HbFDxGZjhbMBeFHRQhexMFt4pUce3okyRtUVKbbedQFUrtXSBg9VszgF2RTeQDKDkMCIQDtz5ccP/Lk1gw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@remix-run/node@2.9.2(typescript@5.3.3):
@@ -5820,6 +6004,12 @@ packages:
     dependencies:
       '@smithy/abort-controller': 3.0.0
       '@smithy/types': 3.0.0
+      tslib: 2.6.3
+    dev: false
+
+  /@swc/helpers@0.5.11:
+    resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
+    dependencies:
       tslib: 2.6.3
     dev: false
 
@@ -11176,7 +11366,7 @@ packages:
       convert-source-map: 2.0.0
       invariant: 2.2.4
       react: 18.2.0
-      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.2.79)(react@18.2.0)
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -11279,6 +11469,7 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
+    dev: false
 
   /react-native@0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0):
     resolution: {integrity: sha512-0H2XpmghwOtfPpM2LKqHIN7gxy+7G/r1hwJHKLV6uoyXGC/gCojRtoo5NqyKrWpFC8cqyT6wTYCLuG7CxEKilg==}
@@ -11336,7 +11527,6 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
-    dev: true
 
   /react-refresh@0.14.2:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}

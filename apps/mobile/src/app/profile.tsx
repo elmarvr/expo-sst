@@ -1,7 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage, Input, Label } from '@acme/ui';
+// import { Avatar, AvatarFallback, AvatarImage, Input, Label } from '@acme/ui';
 import { Stack } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
+// import { View } from 'react-native';
 
 import { api } from '~/lib/api';
 
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Profile' }} />
-
+      {/* 
       <View className="items-center gap-y-3 p-4">
         <Avatar alt="Test test test" className="size-24">
           <AvatarImage src={data?.avatar ?? undefined} />
@@ -22,7 +22,7 @@ export default function Home() {
           <Label nativeID="email">Email</Label>
           <Input nativeID="email" placeholder="Email" defaultValue={data?.email} />
         </View>
-      </View>
+      </View> */}
     </>
   );
 }
