@@ -1,9 +1,14 @@
 import * as React from "react";
 import { View, type ViewProps, Text, type TextProps } from "react-native";
-import { createFormControl } from "@gluestack-ui/form-control";
-import { cva } from "../lib/utils";
+import {
+  createFormControl,
+  useFormControlContext as __useFormControlContext,
+} from "@gluestack-ui/form-control";
+
 import { VariantProps } from "cva";
 import { IFormControlProps } from "@gluestack-ui/form-control/lib/typescript/types";
+import { cva, cx, mergeProps } from "../lib/utils";
+import { useFieldState } from "./form";
 
 const formControlVariants = cva({
   base: "gap-y-1",
@@ -12,6 +17,10 @@ const formControlVariants = cva({
       sm: "",
       md: "",
       lg: "",
+    },
+    isDisabled: {
+      true: "opacity-50",
+      false: "",
     },
   },
 });
@@ -43,24 +52,21 @@ const formControlAstrickVariants = cva({
 
 type FormControlVariants = VariantProps<typeof formControlVariants>;
 
-const FormControlContext = React.createContext<FormControlVariants | null>(
-  null
-);
+const FormControlVariantsContext =
+  React.createContext<FormControlVariants | null>(null);
 
-export function useFormControlContext() {
-  const context = React.useContext(FormControlContext);
-  if (!context) {
-    throw new Error(
-      "useFormControlContext must be used within a <FormControl /> component"
-    );
-  }
-  return context;
+export function useFormControl() {
+  const context = __useFormControlContext();
+  const variants = React.useContext(FormControlVariantsContext);
+
+  return { ...context, ...variants };
 }
 
 interface LabelAstrickProps extends TextProps, FormControlVariants {}
 const LabelAstrick = React.forwardRef<Text, LabelAstrickProps>(
   ({ className, ...props }, ref) => {
-    const { size } = useFormControlContext();
+    const { size } = useFormControl();
+
     return (
       <Text
         {...props}
@@ -88,33 +94,84 @@ export interface FormControlProps
     IFormControlProps,
     FormControlVariants {}
 const FormControlRoot = ({ size, className, ...props }: FormControlProps) => {
+  const fieldState = useFieldState();
+
+  const merged = mergeProps(props, {
+    isInvalid: fieldState?.invalid,
+  });
+
   return (
-    <FormControlContext.Provider value={{ size }}>
+    <FormControlVariantsContext.Provider value={{ size }}>
       <UIFormControl
-        {...props}
-        className={formControlVariants({ className, size })}
+        {...merged}
+        className={formControlVariants({
+          className,
+          size,
+          isDisabled: props.isDisabled,
+        })}
       />
-    </FormControlContext.Provider>
+    </FormControlVariantsContext.Provider>
   );
 };
 
-export interface FormControlLabelProps extends TextProps {}
+export interface FormControlLabelProps extends ViewProps {
+  _text?: TextProps;
+}
 const FormControlLabel = ({
   className,
+  _text,
   children,
   ...props
 }: FormControlLabelProps) => {
-  const [textClassName, labelClassName] = ["", ""];
+  const { className: textClassName, ...textProps } = _text ?? {};
+  const { isInvalid } = useFormControl();
 
   return (
-    <UIFormControl.Label {...props} className={labelClassName}>
-      <UIFormControl.Label.Text className={textClassName}>
+    <UIFormControl.Label
+      {...props}
+      className={formControlLabelVariants({ className })}
+    >
+      <UIFormControl.Label.Text
+        {...textProps}
+        className={cx(
+          "font-medium text-sm",
+          isInvalid && "text-destructive",
+          textClassName
+        )}
+      >
         {children}
       </UIFormControl.Label.Text>
     </UIFormControl.Label>
   );
 };
 
+export interface FormControlErrorProps extends ViewProps {
+  _text?: TextProps;
+}
+const FormControlError = ({
+  className,
+  _text,
+  children,
+  ...props
+}: FormControlErrorProps) => {
+  const { className: textClassName, ...textProps } = _text ?? {};
+  const fieldState = useFieldState();
+
+  const message = fieldState?.error?.message ?? children;
+
+  return (
+    <UIFormControl.Error {...props} className={className}>
+      <UIFormControl.Error.Text
+        {...textProps}
+        className={cx("text-destructive", textClassName)}
+      >
+        {message}
+      </UIFormControl.Error.Text>
+    </UIFormControl.Error>
+  );
+};
+
 export const FormControl = Object.assign(FormControlRoot, {
   Label: FormControlLabel,
+  Error: FormControlError,
 });

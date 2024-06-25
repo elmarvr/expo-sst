@@ -6,9 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "scripts": {
-    "ui:add": "pnpm dlx @react-native-reusables/cli@latest add"
-  },
+  "scripts": {},
   "devDependencies": {
     "nativewind": "^4.0.1"
   },
@@ -17,7 +15,10 @@
     "@gluestack-ui/button": "^1.0.5",
     "@gluestack-ui/form-control": "^0.1.17",
     "@gluestack-ui/input": "^0.1.30",
+    "@hookform/resolvers": "^3.6.0",
     "cva": "1.0.0-beta.1",
-    "tailwind-merge": "^2.3.0"
+    "react-hook-form": "^7.52.0",
+    "tailwind-merge": "^2.3.0",
+    "zod": "^3.23.8"
   }
 }

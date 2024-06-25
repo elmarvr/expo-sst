@@ -10,8 +10,10 @@ import {
 import { createInput } from "@gluestack-ui/input";
 import type { IInputFieldProps } from "@gluestack-ui/input/lib/typescript/types";
 import type { VariantProps } from "cva";
-import { cva } from "../lib/utils";
+import { cva, mergeProps } from "../lib/utils";
 import { Slot } from "./slot";
+import { useFormControl } from "./form-control";
+import { useController } from "react-hook-form";
 
 const inputGroupVariants = cva({
   base: "flex flex-row h-10 w-full rounded-md border border-input bg-background px-3 py-2 gap-3 flex-none",
@@ -28,7 +30,13 @@ const inputGroupVariants = cva({
 });
 
 const inputVariants = cva({
-  base: "text-base lg:text-sm text-lg leading-[1.25] text-foreground flex-1",
+  base: "text-base lg:text-sm leading-[1.25] flex-1",
+  variants: {
+    isInvalid: {
+      true: "text-destructive",
+      false: "text-foreground",
+    },
+  },
 });
 
 const inputSlotVariants = cva({
@@ -59,13 +67,21 @@ export interface InputGroupProps extends ViewProps, InputGroupVariants {
 }
 const InputGroup = React.forwardRef<View, InputGroupProps>(
   ({ isDisabled, isInvalid, asChild, className, ...props }, ref) => {
+    const context = useFormControl();
     const Comp = asChild ? Slot : View;
+
+    const merged = mergeProps(context, { isDisabled, isInvalid });
+
     return (
-      <InputGroupContext.Provider value={{ isDisabled, isInvalid }}>
+      <InputGroupContext.Provider value={merged}>
         <UIInput>
           <Comp
             {...props}
-            className={inputGroupVariants({ className, isDisabled, isInvalid })}
+            className={inputGroupVariants({
+              className,
+              isDisabled,
+              isInvalid: merged.isInvalid,
+            })}
             ref={ref}
           />
         </UIInput>
@@ -90,10 +106,15 @@ const InputSlot = React.forwardRef<View, InputSlotProps>(
 export interface InputProps extends IInputFieldProps, TextInputProps {}
 const BaseInput = React.forwardRef<TextInputProps, InputProps>(
   ({ className, isDisabled, isInvalid, ...props }, ref) => {
+    const context = React.useContext(InputGroupContext)!;
+
+    const merged = mergeProps(context, { isDisabled, isInvalid });
+
     return (
       <UIInput.Input
         {...props}
-        className={inputVariants({ className })}
+        editable={!merged.isDisabled}
+        className={inputVariants({ className, isInvalid: merged.isInvalid })}
         ref={ref}
       />
     );

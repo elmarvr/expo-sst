@@ -31,7 +31,15 @@ export function mergeRefs<T>(
   };
 }
 
-export function mergeProps(...args: Record<string, any>[]) {
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never;
+
+export function mergeProps<TProps extends Record<string, any>[]>(
+  ...args: TProps
+): UnionToIntersection<TProps[number]> {
   const result = { ...args[0] };
 
   for (let i = 1; i < args.length; i++) {
@@ -51,10 +59,14 @@ export function mergeProps(...args: Record<string, any>[]) {
       if (propName === "className") {
         result[propName] = cx(value, propValue);
       }
+
+      if (propValue != null) {
+        result[propName] = propValue;
+      }
     }
   }
 
-  return result;
+  return result as any;
 }
 
 export function isHandler(propName: string) {
