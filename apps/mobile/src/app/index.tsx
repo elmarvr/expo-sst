@@ -3,6 +3,8 @@ import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { z } from 'zod';
 
+import { api } from '~/lib/api';
+
 export default function Home() {
   const form = useForm({
     schema: z.object({
@@ -10,16 +12,24 @@ export default function Home() {
     }),
   });
 
-  const onSubmit = form.handleSubmit((data) => {
-    console.log(data);
+  api.uptime.read.useSubscription(0, {
+    onData(data) {
+      console.log(data);
+    },
   });
+  const { mutate } = api.uptime.dispatch.useMutation();
+
+  const onSubmit = form.handleSubmit((data) => {});
 
   return (
     <>
       <Stack.Screen options={{ title: 'Home' }} />
 
       <View className="p-3">
-        <Form onSubmit={onSubmit}>
+        <Button onPress={() => mutate()} className="mb-3">
+          <Button.Text>Dispatch</Button.Text>
+        </Button>
+        {/* <Form onSubmit={onSubmit}>
           <Form.Field control={form.control} name="email">
             {({ field }) => (
               <FormControl>
@@ -35,7 +45,7 @@ export default function Home() {
               <Button.Text>Test</Button.Text>
             </Button>
           </Form.Trigger>
-        </Form>
+        </Form> */}
       </View>
     </>
   );

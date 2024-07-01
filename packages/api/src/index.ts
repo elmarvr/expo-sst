@@ -1,7 +1,9 @@
 import { awsLambdaRequestHandler } from "@trpc/server/adapters/aws-lambda";
 
 import { createContext } from "./context";
-import { appRouter } from "./routers/_app";
+import { AppRouter, appRouter } from "./routers/_app";
+
+import { createEmitter } from "@acme/ws/emitter";
 
 export const handler = awsLambdaRequestHandler({
   router: appRouter,
@@ -9,3 +11,5 @@ export const handler = awsLambdaRequestHandler({
 });
 
 export type { AppRouter } from "./routers/_app";
+
+const ws = createEmitter<AppRouter>();

@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@acme/db": "workspace:^",
+    "@acme/ws": "workspace:^",
+    "@aws-sdk/client-dynamodb": "^3.606.0",
     "@aws-sdk/client-s3": "^3.592.0",
     "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@trpc/server": "^10.45.2",

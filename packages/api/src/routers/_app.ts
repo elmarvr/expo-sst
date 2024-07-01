@@ -1,32 +1,24 @@
 import { z } from "zod";
-import { table } from "@acme/db";
 import { publicProcedure, router } from "../trpc";
 import { authRouter } from "./auth";
+import { observable } from "@trpc/server/observable";
+import { createEmitter } from "@acme/ws/emitter";
 
+const ws = createEmitter<AppRouter>();
+
+const start = Date.now();
 export const appRouter = router({
-  todo: router({
-    create: publicProcedure
-      .input(
-        z.object({
-          title: z.string(),
-          description: z.string().optional(),
-        })
-      )
-      .mutation(async ({ input, ctx }) => {
-        const [newTodo] = await ctx.db
-          .insert(table.todo)
-          .values(input)
-          .returning()
-          .execute();
+  uptime: router({
+    read: publicProcedure.input(z.number()).subscription(async () => {
+      return observable<{ uptime: number }>(() => {});
+    }),
+    dispatch: publicProcedure.mutation(async () => {
+      const now = Date.now();
 
-        return newTodo;
-      }),
-    list: publicProcedure.query(async ({ ctx }) => {
-      const todos = await ctx.db.query.todo.findMany();
-
-      return todos;
+      ws.uptime.read.emit({ uptime: now - start });
     }),
   }),
+
   auth: authRouter,
 });
 
