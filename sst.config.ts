@@ -32,7 +32,6 @@ export default $config({
         {
           userPool: userPool.id,
           client: client.id,
-          vpc,
         },
       ],
     });

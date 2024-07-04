@@ -44,42 +44,41 @@ export class Connection {
     return this.apiG.send(command);
   }
 
-  send(id: number, data: unknown) {
+  send(id: string, payload: ConnectionPayload) {
+    const result: Record<string, unknown> = {
+      type: payload.type,
+      data: undefined,
+    };
+
+    if (payload.type === "data") {
+      result.data = superjson.serialize(payload.data);
+    }
+
     const command = new PostToConnectionCommand({
       ConnectionId: this.connectionId,
       Data: JSON.stringify({
         id,
-        result: {
-          type: "data",
-          data: superjson.serialize(data),
-        },
+        result,
       }),
     });
 
     return this.apiG.send(command);
   }
 
-  async start(id: number) {
-    const command = new PostToConnectionCommand({
-      ConnectionId: this.connectionId,
-      Data: JSON.stringify({
-        id,
-        result: { type: "started" },
-      }),
-    });
-
-    return this.apiG.send(command);
+  async start(id: string) {
+    this.send(id, { type: "started" });
   }
 
-  async stop(id: number) {
-    const command = new PostToConnectionCommand({
-      ConnectionId: this.connectionId,
-      Data: JSON.stringify({
-        id,
-        result: { type: "stopped" },
-      }),
-    });
-
-    return this.apiG.send(command);
+  async stop(id: string) {
+    this.send(id, { type: "stopped" });
   }
 }
+
+type ConnectionPayload =
+  | {
+      type: "started" | "stopped";
+    }
+  | {
+      type: "data";
+      data: unknown;
+    };

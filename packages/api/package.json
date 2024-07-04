@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "scripts": {},
   "devDependencies": {
     "@types/aws-lambda": "8.10.138"

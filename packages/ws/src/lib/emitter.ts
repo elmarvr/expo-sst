@@ -1,4 +1,4 @@
-import { ProcedureRecord, Router } from "@trpc/server";
+import { Procedure, Router } from "@trpc/server";
 import {
   createRecursiveProxy,
   inferTransformedSubscriptionOutput,
@@ -9,29 +9,13 @@ import { Resource } from "sst";
 import { ApiGatewayManagementApiServiceException } from "@aws-sdk/client-apigatewaymanagementapi";
 import { SubscriptionItem } from "./validation";
 
-export type CreateEmitter<TRouter extends Router<any>> = CreateEmitterInner<
-  TRouter["_def"]["procedures"]
->;
-
-type CreateEmitterInner<TProcedures extends ProcedureRecord> = {
-  [TKey in keyof TProcedures]: TProcedures[TKey] extends Router<any>
-    ? CreateEmitterInner<TProcedures[TKey]["_def"]["procedures"]>
-    : {
-        emit: (
-          payload: inferTransformedSubscriptionOutput<TProcedures[TKey]>
-        ) => void;
-      };
-};
-
 export function createEmitter<
   TRouter extends Router<any>,
 >(): CreateEmitter<TRouter> {
   return createRecursiveProxy(async ({ path, args }) => {
-    const pathCopy = [...path];
-    const lastArg = pathCopy.pop()!;
-    const pathStr = pathCopy.join(".");
+    const pathStr = path.join(".");
 
-    if (lastArg === "emit") {
+    if (args) {
       const S = new Subscription();
 
       const subscriptions = await S.getByTopic(pathStr);
@@ -43,7 +27,10 @@ export function createEmitter<
         });
 
         try {
-          return C.send(id, args[0]);
+          return C.send(id, {
+            type: "data",
+            data: args[0],
+          });
         } catch (error) {
           if (error instanceof ApiGatewayManagementApiServiceException) {
             S.remove({
@@ -58,3 +45,28 @@ export function createEmitter<
     }
   }) as CreateEmitter<TRouter>;
 }
+
+export type CreateEmitter<TRouter extends Router<any>> = CreateEmitterInner<
+  TRouter["_def"]["procedures"]
+>;
+
+export type CreateEmitterInner<T> = {
+  [TKey in keyof T as HasSubscriptions<T[TKey]> extends true
+    ? TKey
+    : never]: T[TKey] extends Procedure<"subscription", any>
+    ? (payload: inferTransformedSubscriptionOutput<T[TKey]>) => void
+    : T[TKey] extends Router<infer _Def>
+      ? CreateEmitterInner<_Def["record"]>
+      : never;
+};
+
+export type HasSubscriptions<T> =
+  T extends Router<infer _Def>
+    ? true extends {
+        [TKey in keyof _Def["record"]]: HasSubscriptions<_Def["record"][TKey]>;
+      }[keyof _Def["record"]]
+      ? true
+      : false
+    : T extends Procedure<"subscription", any>
+      ? true
+      : false;

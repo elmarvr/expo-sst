@@ -1,12 +1,12 @@
-import { APIGatewayProxyHandler } from "aws-lambda";
+import { APIGatewayProxyWebsocketHandlerV2 } from "aws-lambda";
 import { Subscription } from "./lib/subscription";
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
   const { connectionId } = event.requestContext;
 
   const subscription = new Subscription();
 
-  if (connectionId) await subscription.removeByConnectionId(connectionId);
+  await subscription.removeByConnectionId(connectionId);
 
   return { statusCode: 200, body: "Disconnected" };
 };

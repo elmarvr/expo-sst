@@ -10,7 +10,7 @@ import { getImageUrl, uploadImagefromUrl } from "./s3";
 globalThis.crypto = webcrypto;
 
 export const lucia = new Lucia(
-  new DrizzlePostgreSQLAdapter(db, table.session, table.user),
+  new DrizzlePostgreSQLAdapter(db, table.sessions, table.users),
   {
     getUserAttributes(attrs) {
       return {
@@ -36,15 +36,15 @@ export function getSessionFromBearerToken(authorization: string) {
 export async function signInWithIdToken(idToken: string) {
   const payload = await jwtVerifier.verify(idToken);
 
-  let user = await db.query.user.findFirst({
-    where: eq(table.user.cognitoId, payload.sub),
+  let user = await db.query.users.findFirst({
+    where: eq(table.users.cognitoId, payload.sub),
   });
 
   if (!user) {
     const avatarKey = await uploadImagefromUrl(payload.picture as string);
 
     const result = await db
-      .insert(table.user)
+      .insert(table.users)
       .values({
         cognitoId: payload.sub,
         email: payload.email as string,
@@ -68,7 +68,7 @@ declare module "lucia" {
     Lucia: typeof lucia;
     UserId: number;
 
-    DatabaseUserAttributes: typeof table.user.$inferSelect;
+    DatabaseUserAttributes: typeof table.users.$inferSelect;
   }
 }
 

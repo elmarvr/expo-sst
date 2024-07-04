@@ -1,11 +1,9 @@
 import { z } from "zod";
 
-export const socketBodySchema = z
-  .object({
-    id: z.number(),
-    method: z.string(),
-  })
-  .passthrough();
+export const socketBodySchema = z.object({
+  id: z.coerce.string(),
+  method: z.string(),
+});
 
 export const subscribeBodySchema = socketBodySchema.extend({
   params: z.object({

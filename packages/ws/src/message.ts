@@ -7,8 +7,6 @@ import { socketBodySchema, subscribeBodySchema } from "./lib/validation";
 export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
   const { stage, domainName, connectionId } = event.requestContext;
 
-  console.log({ stage, domainName, connectionId });
-
   if (!event.body) {
     return { statusCode: 400, body: "No Data" };
   }
@@ -24,7 +22,7 @@ export const handler: APIGatewayProxyWebsocketHandlerV2 = async (event) => {
     endpoint: `https://${domainName}/${stage}`,
   });
 
-  const result = socketBodySchema.safeParse(body);
+  const result = socketBodySchema.passthrough().safeParse(body);
 
   if (!result.success) {
     C.error({

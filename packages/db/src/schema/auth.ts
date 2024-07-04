@@ -1,7 +1,8 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { integer, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { baseTable } from "../utils";
 
-export const user = pgTable("users", {
+export const users = baseTable("users", {
   id: serial("id").primaryKey(),
   email: text("email").notNull().unique(),
   name: text("name").notNull(),
@@ -9,17 +10,19 @@ export const user = pgTable("users", {
   cognitoId: text("cognito_id").notNull().unique(),
 });
 
-export const session = pgTable("sessions", {
+export const userRelations = relations(users, ({ many }) => ({}));
+
+export const sessions = baseTable("sessions", {
   id: text("id").primaryKey(),
   userId: integer("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => users.id),
   expiresAt: timestamp("expires_at").notNull(),
 });
 
-export const sessionRelations = relations(session, ({ one }) => ({
-  user: one(user, {
-    fields: [session.userId],
-    references: [user.id],
+export const sessionRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
   }),
 }));

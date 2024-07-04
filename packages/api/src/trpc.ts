@@ -1,6 +1,11 @@
 import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
+import { createEmitter } from "@acme/ws/emitter";
+
 import type { Context } from "./context";
+import type { AppRouter } from "./routers/_app";
+
+export const emit = createEmitter<AppRouter>();
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
