@@ -1,12 +1,20 @@
 import { z } from "zod";
-import { and, eq, table } from "@acme/db";
+import { and, db, eq, table } from "@acme/db";
 import { privateProcedure, router } from "../trpc";
 
 export const roomRouter = router({
+  list: privateProcedure.query(async ({ ctx }) => {
+    const rooms = await db.query.rooms.findMany({
+      where: eq(table.members.userId, ctx.user.id),
+    });
+
+    return rooms;
+  }),
+
   create: privateProcedure
     .input(z.object({ name: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      const [room] = await ctx.db
+      const [room] = await db
         .insert(table.rooms)
         .values({
           name: input.name,
@@ -16,7 +24,7 @@ export const roomRouter = router({
         })
         .execute();
 
-      await ctx.db
+      await db
         .insert(table.members)
         .values({
           roomId: room.id,
@@ -34,7 +42,7 @@ export const roomRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db
+      await db
         .insert(table.members)
         .values({
           roomId: input.roomId,
@@ -50,7 +58,7 @@ export const roomRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.db
+      await db
         .delete(table.members)
         .where(
           and(

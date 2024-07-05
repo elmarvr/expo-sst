@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 import React from 'react';
+import { Text } from 'react-native';
 
 import { api } from '~/lib/api';
 
@@ -9,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Profile' }} />
-      {JSON.stringify(data)}
+      <Text>{JSON.stringify(data)}</Text>
     </>
   );
 }

@@ -1,11 +1,10 @@
 import { Button } from '@acme/ui';
-import { Stack, useRouter } from 'expo-router';
+import { Stack } from 'expo-router';
 
 import { useAuth } from '~/lib/auth';
 
 export default function SignIn() {
   const { signIn } = useAuth();
-  const router = useRouter();
 
   return (
     <>
@@ -13,8 +12,7 @@ export default function SignIn() {
 
       <Button
         onPress={async () => {
-          await signIn();
-          router.push('profile');
+          await signIn({ redirectTo: 'rooms' });
         }}>
         <Button.Text>Sign in</Button.Text>
       </Button>

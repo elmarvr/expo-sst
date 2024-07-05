@@ -1,28 +1,26 @@
-import {
-  text,
-  serial,
-  pgTable,
-  timestamp,
-  primaryKey,
-} from "drizzle-orm/pg-core";
-import { users } from "./auth";
 import { relations } from "drizzle-orm";
-import { baseTable } from "../utils";
+import { users } from "./auth";
+import {
+  integer,
+  primaryKey,
+  sqliteTable,
+  text,
+} from "drizzle-orm/sqlite-core";
 
-export const rooms = pgTable("rooms", {
-  id: serial("id").primaryKey(),
-  name: text("name"),
+export const rooms = sqliteTable("rooms", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
 });
 
 export const roomRelations = relations(rooms, ({ many }) => ({
   members: many(members),
 }));
 
-export const members = pgTable(
+export const members = sqliteTable(
   "members",
   {
-    roomId: serial("room_id").references(() => rooms.id),
-    userId: serial("user_id").references(() => users.id),
+    roomId: integer("room_id").references(() => rooms.id),
+    userId: integer("user_id").references(() => users.id),
   },
   (table) => {
     return {
@@ -31,10 +29,10 @@ export const members = pgTable(
   }
 );
 
-export const chats = pgTable("chats", {
-  id: serial("id").primaryKey(),
-  roomId: serial("room_id").references(() => rooms.id),
-  userId: serial("user_id").references(() => users.id),
+export const chats = sqliteTable("chats", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  roomId: integer("room_id").references(() => rooms.id),
+  userId: integer("user_id").references(() => users.id),
   message: text("message").notNull(),
 });
 

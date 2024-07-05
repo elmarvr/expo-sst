@@ -1,10 +1,13 @@
-import { drizzle } from "drizzle-orm/aws-data-api/pg";
-import { RDSDataClient } from "@aws-sdk/client-rds-data";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
 import { Resource } from "sst";
 import * as common from "./schema/common";
 import * as auth from "./schema/auth";
 
-const client = new RDSDataClient({});
+const client = createClient({
+  url: Resource.DatabaseUrl.value,
+  authToken: Resource.DatabaseAuthToken.value,
+});
 
 export const table = {
   ...auth,
@@ -12,10 +15,6 @@ export const table = {
 };
 
 export const db = drizzle(client, {
-  database: Resource.Postgres.database,
-  secretArn: Resource.Postgres.secretArn,
-  resourceArn: Resource.Postgres.clusterArn,
-
   schema: table,
 });
 

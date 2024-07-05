@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { emit, privateProcedure, router } from "../trpc";
-import { table } from "@acme/db";
+import { db, table } from "@acme/db";
 import { observable } from "@trpc/server/observable";
 
 export const chatRouter = router({
@@ -12,7 +12,7 @@ export const chatRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const message = await ctx.db
+      const message = await db
         .insert(table.chats)
         .values({
           userId: ctx.user.id,
@@ -35,6 +35,8 @@ export const chatRouter = router({
     }),
 
   onSend: privateProcedure.subscription(async () => {
-    return observable<typeof table.chats.$inferInsert>(() => {});
+    return observable<Omit<Required<Chat>, "id">>(() => {});
   }),
 });
+
+export type Chat = typeof table.chats.$inferSelect;

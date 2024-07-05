@@ -9,8 +9,12 @@ export default $config({
     };
   },
   async run() {
-    const vpc = new sst.aws.Vpc("Vpc", {});
-    const rds = new sst.aws.Postgres("Postgres", { vpc });
+    const secrets = {
+      db: {
+        url: new sst.Secret("DatabaseUrl"),
+        authToken: new sst.Secret("DatabaseAuthToken"),
+      },
+    };
 
     const bucket = new sst.aws.Bucket("Bucket", {
       public: true,
@@ -64,7 +68,13 @@ export default $config({
 
     const api = new sst.aws.Function("Api", {
       url: true,
-      link: [rds, userPool, bucket, ws, subscriptionTable],
+      link: [
+        userPool,
+        bucket,
+        ws,
+        subscriptionTable,
+        ...Object.values(secrets.db),
+      ],
       environment: {
         COGNTIO_CLIENT_ID: client.id,
       },

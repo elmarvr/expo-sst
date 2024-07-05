@@ -7,11 +7,13 @@ declare module "sst" {
       name: string
       type: "sst.aws.Bucket"
     }
-    Postgres: {
-      clusterArn: string
-      database: string
-      secretArn: string
-      type: "sst.aws.Postgres"
+    DatabaseAuthToken: {
+      type: "sst.sst.Secret"
+      value: string
+    }
+    DatabaseUrl: {
+      type: "sst.sst.Secret"
+      value: string
     }
     Subscription: {
       name: string

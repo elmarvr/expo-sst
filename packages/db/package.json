@@ -7,11 +7,12 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "db:push": "sst shell drizzle-kit push",
-    "db:studio": "sst shell drizzle-kit studio"
+    "db": "sst shell drizzle-kit",
+    "generate": "pnpm db generate",
+    "migrate": "pnpm db migrate"
   },
   "dependencies": {
-    "@aws-sdk/client-rds-data": "^3.590.0",
+    "@libsql/client": "^0.7.0",
     "drizzle-orm": "^0.31.1",
     "sst": "^3.0.32"
   },

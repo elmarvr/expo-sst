@@ -1,7 +1,7 @@
 import { webcrypto } from "node:crypto";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { Resource } from "sst";
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
+import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { Lucia } from "lucia";
 
 import { db, table, eq } from "@acme/db";
@@ -10,7 +10,7 @@ import { getImageUrl, uploadImagefromUrl } from "./s3";
 globalThis.crypto = webcrypto;
 
 export const lucia = new Lucia(
-  new DrizzlePostgreSQLAdapter(db, table.sessions, table.users),
+  new DrizzleSQLiteAdapter(db, table.sessions, table.users),
   {
     getUserAttributes(attrs) {
       return {

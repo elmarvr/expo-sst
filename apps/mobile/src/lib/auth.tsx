@@ -6,7 +6,8 @@ import {
   useAuthRequest,
 } from 'expo-auth-session';
 import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { ExpoRouter } from 'expo-router/types/expo-router';
+import { useEffect, useRef } from 'react';
 
 import { api } from './api';
 import { authStore } from './storage';
@@ -23,6 +24,8 @@ const redirectUri = makeRedirectUri({});
 export function useAuth() {
   const router = useRouter();
   const utils = api.useUtils();
+  const signInRedirect = useRef<ExpoRouter.Href | null>(null);
+
   const { mutateAsync: signInWithIdToken } = api.auth.signInWithIdToken.useMutation({
     onSuccess: async () => {
       await utils.auth.currentUser.invalidate();
@@ -72,13 +75,17 @@ export function useAuth() {
 
       await authStore.setItem('sessionToken', sessionToken);
 
-      router.push('profile');
+      router.push(signInRedirect.current ?? 'profile');
     } catch (error) {
       console.error(error);
     }
   }
 
   return {
-    signIn: promptAsync,
+    signIn: async (opts?: { redirectTo?: ExpoRouter.Href }) => {
+      signInRedirect.current = opts?.redirectTo ?? null;
+
+      await promptAsync();
+    },
   };
 }
