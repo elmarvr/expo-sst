@@ -216,6 +216,9 @@ importers:
       '@gluestack-ui/button':
         specifier: ^1.0.5
         version: 1.0.5(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/checkbox':
+        specifier: ^0.1.30
+        version: 0.1.30(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
       '@gluestack-ui/form-control':
         specifier: ^0.1.17
         version: 0.1.17(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
@@ -228,6 +231,9 @@ importers:
       cva:
         specifier: 1.0.0-beta.1
         version: 1.0.0-beta.1
+      lucide-react-native:
+        specifier: ^0.403.0
+        version: 0.403.0(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0)
       react-hook-form:
         specifier: ^7.52.0
         version: 7.52.0(react@18.2.0)
@@ -240,7 +246,7 @@ importers:
     devDependencies:
       nativewind:
         specifier: ^4.0.1
-        version: 4.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4)
+        version: 4.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4)
 
   packages/ws:
     dependencies:
@@ -4194,8 +4200,42 @@ packages:
       - react-native
     dev: false
 
+  /@gluestack-ui/checkbox@0.1.30(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-YXyIWXZSRHxf8NpvXuBrypZL8fbNd8JiNR09jBhPTlB2FeJhqa4tQiV6xgI72YrhsVOZxOZsIsdTRvLx11VC+w==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/form-control': 0.1.18(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@react-aria/visually-hidden': 3.8.12(react@18.2.0)
+      '@react-native-aria/checkbox': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/utils': 0.2.11(react-native@0.74.1)(react@18.2.0)
+      '@react-stately/checkbox': 3.6.5(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
   /@gluestack-ui/form-control@0.1.17(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
     resolution: {integrity: sha512-ctmbce3Tf/rpZyXSleOI2aUrOZEa/t7ubaB61F9Y0CauoaELMHrfSr4UZ5y4GC7z7pwvLXtMEpzEWvDQ9Af9Bg==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@gluestack-ui/utils': 0.1.13(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/focus': 0.2.9(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@gluestack-ui/form-control@0.1.18(react-dom@18.2.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-sVRdh5qZwZGddMiHTG0IHEEktO6iwgKFSoccjmK7P7U/shWt7xAdt5Hh2Rp7+2C/g02v76uFlycI+GhtbnwLGw==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
@@ -4848,6 +4888,21 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-aria/checkbox@3.2.1(react@18.2.0):
+    resolution: {integrity: sha512-XnypnlVIfhB3CD7eSjSds8hNkzHgnhu0t48I1D0jYdL1O6tQC4UytPdIqlemRYBVHDloZkWerbjenpHnxhv8iA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1
+    dependencies:
+      '@babel/runtime': 7.24.7
+      '@react-aria/label': 3.7.8(react@18.2.0)
+      '@react-aria/toggle': 3.10.4(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-stately/checkbox': 3.6.5(react@18.2.0)
+      '@react-stately/toggle': 3.7.4(react@18.2.0)
+      '@react-types/checkbox': 3.8.1(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
   /@react-aria/focus@3.17.1(react@18.2.0):
     resolution: {integrity: sha512-FLTySoSNqX++u0nWZJPPN5etXY0WBxaIe/YuL/GTEeuqUIuC/2bJSaw5hlsM6T2yjy6Y/VAxBcKSdAFUlU6njQ==}
     peerDependencies:
@@ -4873,12 +4928,37 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-aria/label@3.7.8(react@18.2.0):
+    resolution: {integrity: sha512-MzgTm5+suPA3KX7Ug6ZBK2NX9cin/RFLsv1BdafJ6CZpmUSpWnGE/yQfYUB7csN7j31OsZrD3/P56eShYWAQfg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
   /@react-aria/ssr@3.9.4(react@18.2.0):
     resolution: {integrity: sha512-4jmAigVq409qcJvQyuorsmBR4+9r3+JEC60wC+Y0MZV0HCtTmm8D9guYXlJMdx0SSkgj0hHAyFm/HvPNFofCoQ==}
     engines: {node: '>= 12'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-aria/toggle@3.10.4(react@18.2.0):
+    resolution: {integrity: sha512-bRk+CdB8QzrSyGNjENXiTWxfzYKRw753iwQXsEAU7agPCUdB8cZJyrhbaUoD0rwczzTp2zDbZ9rRbUPdsBE2YQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/focus': 3.17.1(react@18.2.0)
+      '@react-aria/interactions': 3.21.3(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-stately/toggle': 3.7.4(react@18.2.0)
+      '@react-types/checkbox': 3.8.1(react@18.2.0)
       '@swc/helpers': 0.5.11
       react: 18.2.0
     dev: false
@@ -4894,6 +4974,33 @@ packages:
       '@swc/helpers': 0.5.11
       clsx: 2.0.0
       react: 18.2.0
+    dev: false
+
+  /@react-aria/visually-hidden@3.8.12(react@18.2.0):
+    resolution: {integrity: sha512-Bawm+2Cmw3Xrlr7ARzl2RLtKh0lNUdJ0eNqzWcyx4c0VHUAWtThmH5l+HRqFUGzzutFZVo89SAy40BAbd0gjVw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/interactions': 3.21.3(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-native-aria/checkbox@0.2.9(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-REycBw1DKbw2r9LbynrB+egWOnJXo1YPoMkAQOv6wiKgIzRZ69l4GpmAwkwqUmKit+DJM9Van6/cGl9kOKTAeA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@react-aria/checkbox': 3.2.1(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-native-aria/toggle': 0.2.8(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/utils': 0.2.11(react-native@0.74.1)(react@18.2.0)
+      '@react-stately/toggle': 3.7.4(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
     dev: false
 
   /@react-native-aria/focus@0.2.9(react-native@0.74.1)(react@18.2.0):
@@ -4916,6 +5023,22 @@ packages:
       '@react-aria/interactions': 3.21.3(react@18.2.0)
       '@react-aria/utils': 3.24.1(react@18.2.0)
       '@react-native-aria/utils': 0.2.11(react-native@0.74.1)(react@18.2.0)
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
+    dev: false
+
+  /@react-native-aria/toggle@0.2.8(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-4TJXuIUuVeozbV3Lk9YUxHxCHAhignn6/GfEdQv8XsfKHUmRMHyvXwdrmKTQCnbtz2Nn+NDUoqKUfZtOYpT3cg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@react-aria/focus': 3.17.1(react@18.2.0)
+      '@react-aria/utils': 3.24.1(react@18.2.0)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.74.1)(react@18.2.0)
+      '@react-native-aria/utils': 0.2.11(react-native@0.74.1)(react@18.2.0)
+      '@react-stately/toggle': 3.7.4(react@18.2.0)
+      '@react-types/checkbox': 3.8.1(react@18.2.0)
       react: 18.2.0
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
     dev: false
@@ -5281,6 +5404,7 @@ packages:
       nullthrows: 1.1.1
       react: 18.2.0
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.2.79)(react@18.2.0)
+    dev: false
 
   /@react-native/virtualized-lists@0.74.83(react-native@0.74.1)(react@18.2.0):
     resolution: {integrity: sha512-rmaLeE34rj7py4FxTod7iMTC7BAsm+HrGA8WxYmEJeyTV7WSaxAkosKoYBz8038mOiwnG9VwA/7FrB6bEQvn1A==}
@@ -5383,12 +5507,55 @@ packages:
       nanoid: 3.3.7
     dev: false
 
+  /@react-stately/checkbox@3.6.5(react@18.2.0):
+    resolution: {integrity: sha512-IXV3f9k+LtmfQLE+DKIN41Q5QB/YBLDCB1YVx5PEdRp52S9+EACD5683rjVm8NVRDwjMi2SP6RnFRk7fVb5Azg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-stately/form': 3.0.3(react@18.2.0)
+      '@react-stately/utils': 3.10.1(react@18.2.0)
+      '@react-types/checkbox': 3.8.1(react@18.2.0)
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-stately/form@3.0.3(react@18.2.0):
+    resolution: {integrity: sha512-92YYBvlHEWUGUpXgIaQ48J50jU9XrxfjYIN8BTvvhBHdD63oWgm8DzQnyT/NIAMzdLnhkg7vP+fjG8LjHeyIAg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-types/shared': 3.23.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-stately/toggle@3.7.4(react@18.2.0):
+    resolution: {integrity: sha512-CoYFe9WrhLkDP4HGDpJYQKwfiYCRBAeoBQHv+JWl5eyK61S8xSwoHsveYuEZ3bowx71zyCnNAqWRrmNOxJ4CKA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-stately/utils': 3.10.1(react@18.2.0)
+      '@react-types/checkbox': 3.8.1(react@18.2.0)
+      '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
   /@react-stately/utils@3.10.1(react@18.2.0):
     resolution: {integrity: sha512-VS/EHRyicef25zDZcM/ClpzYMC5i2YGN6uegOeQawmgfGjb02yaCX0F0zR69Pod9m2Hr3wunTbtpgVXvYbZItg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@swc/helpers': 0.5.11
+      react: 18.2.0
+    dev: false
+
+  /@react-types/checkbox@3.8.1(react@18.2.0):
+    resolution: {integrity: sha512-5/oVByPw4MbR/8QSdHCaalmyWC71H/QGgd4aduTJSaNi825o+v/hsN2/CH7Fq9atkLKsC8fvKD00Bj2VGaKriQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-types/shared': 3.23.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -7535,6 +7702,9 @@ packages:
       inherits: 2.0.4
       readable-stream: 3.6.2
 
+  /boolbase@1.0.0:
+    resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
   /bowser@2.11.0:
     resolution: {integrity: sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==}
     dev: false
@@ -8005,6 +8175,26 @@ packages:
       hyphenate-style-name: 1.0.5
     dev: false
 
+  /css-select@5.1.0:
+    resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 6.1.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      nth-check: 2.1.1
+
+  /css-tree@1.1.3:
+    resolution: {integrity: sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      mdn-data: 2.0.14
+      source-map: 0.6.1
+
+  /css-what@6.1.0:
+    resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
+    engines: {node: '>= 6'}
+
   /cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
@@ -8218,6 +8408,29 @@ packages:
       esutils: 2.0.3
     dev: true
 
+  /dom-serializer@2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.5.0
+
+  /domelementtype@2.3.0:
+    resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+
+  /domhandler@5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
+    engines: {node: '>= 4'}
+    dependencies:
+      domelementtype: 2.3.0
+
+  /domutils@3.1.0:
+    resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+
   /dotenv-expand@11.0.6:
     resolution: {integrity: sha512-8NHi73otpWsZGBSZwwknTXS5pqMOrk9+Ssrna8xCaxkzEpU9OTf9R5ArQGVw03//Zmk9MOwLPng9WwndvpAJ5g==}
     engines: {node: '>=12'}
@@ -8348,6 +8561,10 @@ packages:
     dependencies:
       once: 1.4.0
     dev: false
+
+  /entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
 
   /env-editor@0.4.2:
     resolution: {integrity: sha512-ObFo8v4rQJAE59M69QzwloxPZtd33TpYEIjtKD1rrFDcM1Gd7IkDxEBU+HriziN6HSHQnBJi8Dmy+JWkav5HKA==}
@@ -10744,6 +10961,18 @@ packages:
       oslo: 1.2.0
     dev: false
 
+  /lucide-react-native@0.403.0(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-PLv7OAREAO5/Zw6xabknb/zny9EF5k8NsFQyQeof3APvo1Ax3D3FzHlAXuwIt/S+Kp1TYUy2Kp86J8Qf7ltnEg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+      react-native-svg: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+    dependencies:
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
+      react-native-svg: 15.3.0(react-native@0.74.1)(react@18.2.0)
+    dev: false
+
   /make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
     engines: {node: '>=6'}
@@ -10786,6 +11015,9 @@ packages:
   /md5hex@1.0.0:
     resolution: {integrity: sha512-c2YOUbp33+6thdCUi34xIyOU/a7bvGKj/3DB1iaPMTuPHf/Q2d5s4sn1FaCOO43XkXggnb08y5W2PU8UNYNLKQ==}
     dev: false
+
+  /mdn-data@2.0.14:
+    resolution: {integrity: sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==}
 
   /memfs-browser@3.5.10302:
     resolution: {integrity: sha512-JJTc/nh3ig05O0gBBGZjTCPOyydaTxNF0uHYBrcc1gHNnO+KIHIvo0Y1FKCJsaei6FCl8C6xfQomXqu+cuzkIw==}
@@ -11204,13 +11436,13 @@ packages:
       - supports-color
     dev: false
 
-  /nativewind@4.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4):
+  /nativewind@4.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4):
     resolution: {integrity: sha512-nd0Xgjzaq0ISvUAjibZXcuSvvpX1BGX2mfOGBPZpjGfHL3By6fwLGsNhrKU6mi2FF30c+kdok3e2I4k/O0UO1Q==}
     engines: {node: '>=16'}
     peerDependencies:
       tailwindcss: '>3.3.0'
     dependencies:
-      react-native-css-interop: 0.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4)
+      react-native-css-interop: 0.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4)
       tailwindcss: 3.4.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -11325,6 +11557,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-key: 3.1.1
+
+  /nth-check@2.1.1:
+    resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+    dependencies:
+      boolbase: 1.0.0
 
   /nullthrows@1.1.1:
     resolution: {integrity: sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==}
@@ -12055,7 +12292,7 @@ packages:
       - supports-color
     dev: false
 
-  /react-native-css-interop@0.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4):
+  /react-native-css-interop@0.0.36(@babel/core@7.24.7)(react-native-reanimated@3.10.1)(react-native-svg@15.3.0)(react-native@0.74.1)(react@18.2.0)(tailwindcss@3.4.4):
     resolution: {integrity: sha512-ZWoKQlq6XrI5DB4BdPk5ABvJQsX7zls1SQYWuYXOQB8u5QE0KH3OfOGAGRZPekTjgkhjqGO4Bf8G2JTSWAYMSg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -12079,6 +12316,7 @@ packages:
       react: 18.2.0
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
       react-native-reanimated: 3.10.1(@babel/core@7.24.7)(react-native@0.74.1)(react@18.2.0)
+      react-native-svg: 15.3.0(react-native@0.74.1)(react@18.2.0)
       tailwindcss: 3.4.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -12137,7 +12375,7 @@ packages:
       convert-source-map: 2.0.0
       invariant: 2.2.4
       react: 18.2.0
-      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.2.79)(react@18.2.0)
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -12162,6 +12400,17 @@ packages:
       react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.2.79)(react@18.2.0)
       warn-once: 0.1.1
     dev: false
+
+  /react-native-svg@15.3.0(react-native@0.74.1)(react@18.2.0):
+    resolution: {integrity: sha512-mBHu/fdlzUbpGX8SZFxgbKvK/sgqLfDLP8uh8G7Us+zJgdjO8OSEeqHQs+kPRdQmdLJQiqPJX2WXgCl7ToTWqw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      css-select: 5.1.0
+      css-tree: 1.1.3
+      react: 18.2.0
+      react-native: 0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0)
 
   /react-native-web@0.19.12(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-o2T0oztoVDQjztt4YksO9S1XRjoH/AqcSvifgWLrPJgGVbMWsfhILgl6lfUdEamVZzZSVV/2gqDVMAk/qq7mZw==}
@@ -12240,6 +12489,7 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
+    dev: false
 
   /react-native@0.74.1(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(react@18.2.0):
     resolution: {integrity: sha512-0H2XpmghwOtfPpM2LKqHIN7gxy+7G/r1hwJHKLV6uoyXGC/gCojRtoo5NqyKrWpFC8cqyT6wTYCLuG7CxEKilg==}

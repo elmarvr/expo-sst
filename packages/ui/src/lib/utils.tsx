@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { cssInterop } from "nativewind";
 import type { LucideIcon } from "lucide-react-native";
+import * as React from "react";
 
 export const { cx, compose, cva } = defineConfig({
   hooks: {
@@ -101,4 +102,34 @@ export function iconWithClassName(icon: LucideIcon) {
       },
     },
   });
+}
+
+const STATE_PREFIX = "data-";
+export function withState<
+  TComponent extends React.ComponentType<{ className?: string }>,
+>(component: TComponent): TComponent {
+  const Comp = component;
+
+  return (props: { className?: string; states: Record<string, any> }) => {
+    const { className, states, ...rest } = props;
+
+    const stateVariants = React.useMemo(() => {
+      const parts = className?.split(" ") ?? [];
+      const variants: Record<string, any> = {};
+
+      for (const part of parts) {
+        if (part.startsWith(STATE_PREFIX)) {
+          const [key, value] = part.replace(STATE_PREFIX, "").split(":");
+          variants[key] = { ["true"]: `${variants[key]?.true ?? ""} ${value}` };
+        }
+      }
+
+      return cva({
+        base: parts.join(" "),
+        variants,
+      });
+    }, [className, states]);
+
+    return <Comp className={stateVariants(states)} {...rest} />;
+  };
 }
