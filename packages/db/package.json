@@ -9,7 +9,8 @@
   "scripts": {
     "db": "sst shell drizzle-kit",
     "generate": "pnpm db generate",
-    "migrate": "pnpm db migrate"
+    "migrate": "pnpm db migrate",
+    "studio": "pnpm db studio"
   },
   "dependencies": {
     "@libsql/client": "^0.7.0",

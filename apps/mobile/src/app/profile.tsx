@@ -9,7 +9,6 @@ export default function Home() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Profile' }} />
       <Text>{JSON.stringify(data)}</Text>
     </>
   );

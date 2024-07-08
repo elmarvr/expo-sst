@@ -1,18 +1,25 @@
 import { z } from "zod";
-import { and, db, eq, table } from "@acme/db";
+import { and, db, eq, inArray, table } from "@acme/db";
 import { privateProcedure, router } from "../trpc";
 
 export const roomRouter = router({
   list: privateProcedure.query(async ({ ctx }) => {
-    const rooms = await db.query.rooms.findMany({
+    const members = await db.query.members.findMany({
       where: eq(table.members.userId, ctx.user.id),
+      columns: {
+        roomId: true,
+      },
     });
 
-    return rooms;
+    const roomIds = members.flatMap((member) => member.roomId ?? []);
+
+    return db.query.rooms.findMany({
+      where: inArray(table.rooms.id, roomIds),
+    });
   }),
 
   create: privateProcedure
-    .input(z.object({ name: z.string() }))
+    .input(z.object({ name: z.string(), userIds: z.array(z.number()) }))
     .mutation(async ({ input, ctx }) => {
       const [room] = await db
         .insert(table.rooms)
@@ -24,12 +31,16 @@ export const roomRouter = router({
         })
         .execute();
 
+      const memberIds = [ctx.user.id, ...input.userIds];
+
       await db
         .insert(table.members)
-        .values({
-          roomId: room.id,
-          userId: ctx.user.id,
-        })
+        .values(
+          memberIds.map((userId) => ({
+            roomId: room.id,
+            userId,
+          }))
+        )
         .execute();
 
       return room;
