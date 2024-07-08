@@ -3,6 +3,9 @@ import { StyleSheet } from "react-native";
 import { defineConfig } from "cva";
 import { twMerge } from "tailwind-merge";
 
+import { cssInterop } from "nativewind";
+import type { LucideIcon } from "lucide-react-native";
+
 export const { cx, compose, cva } = defineConfig({
   hooks: {
     onComplete(className) {
@@ -86,4 +89,16 @@ export function chain(...callbacks: any[]): (...args: any[]) => void {
       }
     }
   };
+}
+
+export function iconWithClassName(icon: LucideIcon) {
+  cssInterop(icon, {
+    className: {
+      target: "style",
+      nativeStyleToProp: {
+        color: true,
+        opacity: true,
+      },
+    },
+  });
 }
